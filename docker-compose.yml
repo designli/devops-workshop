@@ -11,11 +11,29 @@ services:
       dockerfile: Dockerfile
     image: designli/devops:dev
     container_name: devops
-    command: npm run start:dev
+    command: npm run start
     ports:
       - "3000:3000"
     env_file:
       - .env
     restart: always
+    networks:
+      - designli-net
+  dozzle:
+    image: amir20/dozzle:v5.8.1
+    container_name: dozzle
+    ports:
+      - 9999:9999
+    env_file:
+      - .env
+    restart: always
+    environment:
+      DOZZLE_USERNAME: admin
+      DOZZLE_PASSWORD: admin
+      DOZZLE_ADDR: :9999
+      DOZZLE_BASE: /app-logs
+      DOZZLE_FILTER: "name=devops"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
     networks:
       - designli-net
