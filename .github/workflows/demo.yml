@@ -1,0 +1,17 @@
+name: Demo
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  log-repo-name:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Log Repository Name
+        run: echo "Repository Name: ${{ github.repository }}"

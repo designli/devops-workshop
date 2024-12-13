@@ -1,0 +1,21 @@
+version: "3.9"
+
+networks:
+  designli-net:
+    driver: bridge
+
+services:
+  devops:
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    image: designli/devops:dev
+    container_name: devops
+    command: npm run start:dev
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    restart: always
+    networks:
+      - designli-net
