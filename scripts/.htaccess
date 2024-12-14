@@ -1,0 +1,8 @@
+RewriteEngine On
+
+# Ensure the requested file or directory does not already exist
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Rewrite any file request to include a subfolder
+RewriteRule ^(.*)$ /nchicas/build/$1 [L]

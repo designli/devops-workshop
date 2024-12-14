@@ -1,0 +1,14 @@
+      - name: Build App
+        run: |
+          echo "REACT_APP_TEXT=Hello from GitHub Actions" > .env
+          npm install && npm run build
+
+      - name: Copy Files to the Server
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEVOPS_HOST }}
+          username: ${{ secrets.DEVOPS_USERNAME }}
+          password: ${{ secrets.DEVOPS_PASSWORD }}
+          port: ${{ secrets.DEVOPS_PORT }}
+          source: "build/"
+          target: /home/bitnami/htdocs/nchicas
